@@ -1,0 +1,18 @@
+{
+    "name": "troy/yii2-image-upload",
+    "description": "upload image via ajax",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","ajax","image-upload"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "troyfan",
+            "email": "fan_ye@hotmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "troy\\ImageUpload\\": ""
+        }
+    }
+}

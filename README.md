@@ -28,4 +28,11 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?= \troy\ImageUpload\AutoloadExample::widget(); ?>```
+<?= \troy\ImageUpload\ImageUpload::widget(
+    [
+         'targetId' => 'imageUpload',//html dom id
+         'config' =>[
+             'action' =>Yii::$app->getUrlManager()->createUrl(['site/index'])
+         ]
+    ]
+); ?>```

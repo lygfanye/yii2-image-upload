@@ -10,6 +10,9 @@
             "email": "fan_ye@hotmail.com"
         }
     ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
     "autoload": {
         "psr-4": {
             "troy\\ImageUpload\\": ""

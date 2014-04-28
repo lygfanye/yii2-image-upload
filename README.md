@@ -27,6 +27,14 @@ Usage
 
 Once the extension is installed, simply use it in your code by  :
 
+
+```html
+
+<a id="imageUpload" href="javascript:;">上传图片</a>
+
+```
+
+
 ```php
 <?= \troy\ImageUpload\ImageUpload::widget(
     [
@@ -37,5 +45,21 @@ Once the extension is installed, simply use it in your code by  :
     ]
 ); ?>
 
+
+```
+
+You also can add some events for it such as onComplete function
+
+```php
+use yii\web\JsExpression;
+<?= \troy\ImageUpload\ImageUpload::widget(
+    [
+         'targetId' => 'imageUpload',//html dom id
+         'config' =>[
+             'action' =>Yii::$app->getUrlManager()->createUrl(['site/index']),
+             'onComplete' => new JsExpression("function(fileName, responseJSON){ something todo...... }")
+         ]
+    ]
+); ?>
 
 ```

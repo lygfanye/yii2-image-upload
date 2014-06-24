@@ -5,6 +5,7 @@ namespace troy\ImageUpload;
 use Yii;
 use yii\helpers\Json;
 use yii\base\InvalidConfigException;
+use yii\helpers\Url;
 use yii\web\JsExpression;
 
 /**
@@ -32,7 +33,12 @@ class ImageUpload extends \yii\base\Widget
 
     public $onSubmitFunction = '';
 
-    private $_baseUrl;
+    /**
+     * you can set the config['action'] or set this baseAuthUrl
+     * if the config['action'] is empty we use the property baseAuthUrl
+     * @var array
+     */
+    public $baseAuthUrl = ['site/upload'];
 
     public $allowedExtensions = "jpg|jpeg|gif|png|gif";
 
@@ -47,7 +53,7 @@ class ImageUpload extends \yii\base\Widget
      */
     protected function dealConfig(){
 
-        if(empty($this->config['action']))
+        if(empty($this->config['action']) && !$this->baseAuthUrl)
             throw new InvalidConfigException ('route can not empty');
         if(empty($this->allowedExtensions))
             throw new InvalidConfigException('allowedExtensions cant not empty');
@@ -56,6 +62,9 @@ class ImageUpload extends \yii\base\Widget
         if($request->enableCsrfValidation){
             $this->config['data'][$request->csrfParam] = $request->getCsrfToken();
         }
+
+        if(empty($this->config['action']) && $this->baseAuthUrl)
+            $this->config['action'] = Url::toRoute($this->baseAuthUrl);
 
         $this->config['onSubmit']= new JsExpression('function (id, ext){if (!(ext && /^('.$this->allowedExtensions.')$/.test(ext))){alert("extensions must in '.$this->allowedExtensions.'");return false;}}');
     }

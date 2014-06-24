@@ -10,13 +10,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist troy/yii2-image-upload "*"
+php composer.phar require --prefer-dist troy/yii2-image-upload ""
 ```
 
 or add
 
 ```
-"troy/yii2-image-upload": "*"
+"troy/yii2-image-upload": ""
 ```
 
 to the require section of your `composer.json` file.
@@ -64,5 +64,32 @@ use yii\web\JsExpression;
 );
 
 ?>
+
+```
+
+if you want to the the UploadAction in this ext you can use :
+
+```
+
+ class SiteController extends Controller
+  {
+      public function actions()
+      {
+          return [
+              'upload' => [
+                  'class' => 'troy\ImageUpload\UploadAction',
+                  'successCallback' => [$this, 'successCallback'],
+                  'beforeStoreCallback' => [$this,'beforeStoreCallback']
+              ],
+          ]
+      }
+ 
+      public function successCallback($store,$file)
+      {
+      }
+      public function beforeStoreCallback($file)
+      {
+      }
+  }
 
 ```

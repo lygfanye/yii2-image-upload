@@ -66,7 +66,9 @@ class ImageUpload extends \yii\base\Widget
         if(empty($this->config['action']) && $this->baseAuthUrl)
             $this->config['action'] = Url::toRoute($this->baseAuthUrl);
 
-        $this->config['onSubmit']= new JsExpression('function (id, ext){if (!(ext && /^('.$this->allowedExtensions.')$/.test(ext))){alert("extensions must in '.$this->allowedExtensions.'");return false;}}');
+        $this->config['onSubmit']= new JsExpression('function (id, ext){if (!(ext && /^('.$this->allowedExtensions.')$/.test(ext))){alert("extensions must in '.$this->allowedExtensions.'"); return false;}'. 
+            ($this->onSubmitFunction?' return  '.$this->onSubmitFunction:'')
+            .'}');
     }
 
     protected function registerAssets(){
